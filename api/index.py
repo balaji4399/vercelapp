@@ -29,4 +29,4 @@ async def get_marks(name: str):
     #     #     marks.append(student["marks"])
     #     else:
     #         marks.append(None)  # Or handle as you prefer
-    return {"marks": marks , 'names': names}
+    return {"marks": marks }
