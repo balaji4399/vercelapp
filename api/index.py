@@ -32,6 +32,7 @@
 #     return {"marks": marks }
 import json
 import os
+from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler
 
 # Sample data for 100 imaginary students
@@ -46,11 +47,10 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
         # Parse query parameters
-        query = self.path.split('?')[-1]
-        params = dict(qc.split('=') for qc in query.split('&'))
+        query_components = parse_qs(urlparse(self.path).query)
 
-        # Get the names from the query parameters
-        names = params.get('name', '').split(',')
+        # Get the names from the query parameters (handling multiple name parameters)
+        names = query_components.get('name', [])
 
         # Retrieve marks for the requested names
         marks = [students_marks.get(name, 0) for name in names]
