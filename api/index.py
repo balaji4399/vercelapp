@@ -22,11 +22,11 @@ marks_data = [{"name":"gBGt","marks":6},{"name":"M","marks":16},{"name":"x","mar
 async def get_marks(name: str):
     names = name.split(',')
     marks = []
-    marks = [marks_data.get(name, 0) for name in names]
-    # for n in names:
-    #     # student = next(student for student in marks_data if student["name"] == n), None
-    #     # if student:
-    #     #     marks.append(student["marks"])
-    #     else:
-    #         marks.append(None)  # Or handle as you prefer
+    # marks = [marks_data.get(name, 0) for name in names]
+    for n in names:
+        student = next(student for student in marks_data if student["name"] == n), None
+        if student:
+            marks.append(student["marks"])
+        else:
+            marks.append(None)  # Or handle as you prefer
     return {"marks": marks }
